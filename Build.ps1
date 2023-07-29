@@ -16,7 +16,7 @@ $DependentModules = @('PSDeploy', 'InvokeBuild', 'PlatyPS')
 Foreach ($Module in $DependentModules) {
     If (-not (Get-Module $module -ListAvailable)) {
         Install-Module -name $Module -Scope CurrentUser -Force
+        Import-Module $module -ErrorAction SilentlyContinue
     }
-    Import-Module $module -ErrorAction SilentlyContinue
 }
 Invoke-Build "$PSScriptRoot\SbModuleBuilder.build.ps1" -Task $Task -Version $Version
